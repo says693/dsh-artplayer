@@ -1,0 +1,82 @@
+{
+  "name": "dsh-artplayer",
+  "version": "1.0.0",
+  "description": "ArtPlayer video player for the DeepSeek Harness Web UI.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/says693/dsh-artplayer.git"
+  },
+  "homepage": "https://github.com/says693/dsh-artplayer#readme",
+  "bugs": {
+    "url": "https://github.com/says693/dsh-artplayer/issues"
+  },
+  "keywords": ["dsh", "cordis", "artplayer", "video", "hls", "plugin"],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.19.0",
+    "dsh": "0.2.1-rc.4"
+  },
+  "icon": "./icon.svg",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./dist/client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale",
+    "dist",
+    "src",
+    "scripts",
+    "licenses",
+    "test/*.test.mjs",
+    "LICENSE",
+    "README.md",
+    "VERIFICATION.md",
+    "THIRD_PARTY_NOTICES.txt",
+    "package-lock.json"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "prepack": "npm run build && npm test"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": "0.2.1-rc.4"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "artplayer": "5.4.0",
+    "esbuild": "0.28.2",
+    "hls.js": "1.7.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}

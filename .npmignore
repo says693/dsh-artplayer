@@ -1,0 +1,9 @@
+.work/
+node_modules/
+test/artifacts/
+**/artifacts/
+.env
+.env.*
+npm-debug.log*
+playwright-report/
+test-results/

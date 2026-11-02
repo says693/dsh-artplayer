@@ -1,0 +1,11 @@
+node_modules/
+.work/
+test/artifacts/
+**/artifacts/
+.env
+.env.*
+.npmrc
+*.tgz
+npm-debug.log*
+playwright-report/
+test-results/

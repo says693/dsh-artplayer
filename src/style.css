@@ -1,0 +1,40 @@
+.dsh-ap-panel{height:100%;display:grid;place-items:start center;padding:24px;box-sizing:border-box;color:var(--dsw-alias-label-primary);background:var(--dsw-alias-bg-base);font:inherit}
+.dsh-ap-launch{border:1px solid var(--dsw-alias-border-l2);border-radius:10px;padding:10px 16px;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);cursor:pointer;font:inherit}
+.dsh-ap-dialog{position:fixed;inset:0;margin:clamp(12px,6vh,56px) auto auto;width:min(520px,calc(100vw - 24px));max-width:none;max-height:none;padding:0;border:0;border-radius:12px;background:#000;color:#fff;overflow:hidden;box-shadow:0 16px 60px #0008;overscroll-behavior:contain}
+.dsh-ap-dialog::backdrop{background:#0009}
+.dsh-ap-dialog[data-expanded=true]{inset:0;width:100vw;height:100dvh;margin:0;border-radius:0}
+.dsh-ap-stage{position:relative;width:100%;aspect-ratio:16/9;isolation:isolate;background:#000;overflow:hidden}
+.dsh-ap-dialog[data-expanded=true] .dsh-ap-stage{height:100%;aspect-ratio:auto}
+.dsh-ap-video{position:absolute;inset:0;width:100%;height:100%}
+.dsh-ap-header{position:absolute;inset:0 0 auto;display:flex;align-items:center;gap:8px;z-index:35;min-height:44px;padding:5px 8px;background:linear-gradient(#000b,transparent);transition:opacity .18s}
+.dsh-ap-header[data-hidden=true]{opacity:0;pointer-events:none}
+.dsh-ap-header:focus-within{opacity:1;pointer-events:auto}
+.dsh-ap-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:500 13px/1.4 system-ui}
+.dsh-ap-icon{border:0;background:transparent;color:inherit;width:36px;height:36px;display:inline-grid;place-items:center;padding:6px;border-radius:7px;cursor:pointer;flex:none}
+.dsh-ap-icon:hover{background:#ffffff20}
+.dsh-ap-icon:focus-visible{outline:2px solid currentColor;outline-offset:-3px}
+.dsh-ap-icon svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.dsh-ap-card{position:absolute;z-index:50;top:48px;right:8px;bottom:8px;box-sizing:border-box;width:min(300px,calc(100% - 16px));overflow:auto;padding:12px;border:1px solid var(--dsw-alias-border-l2);border-radius:9px;color:var(--dsw-alias-label-primary);background:var(--dsw-alias-bg-layer-1);font:13px/1.4 system-ui;overscroll-behavior:contain}
+.dsh-ap-source{left:8px;right:8px;width:auto}
+.dsh-ap-card h2{font-size:14px;margin:0}
+.dsh-ap-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.dsh-ap-card label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0}
+.dsh-ap-card input[type=url]{width:100%;box-sizing:border-box}
+.dsh-ap-card input[type=url],.dsh-ap-card select{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);color:var(--dsw-alias-label-primary);border-radius:6px;padding:7px;font:inherit;min-width:0}
+.dsh-ap-card button:not(.dsh-ap-icon){border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);color:var(--dsw-alias-label-primary);padding:7px 10px;border-radius:6px;font:inherit;cursor:pointer;min-height:34px}
+.dsh-ap-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+.dsh-ap-row>*{flex:1;min-width:0}
+.dsh-ap-file{display:none}
+.dsh-ap-tip{position:absolute;inset:50% 16px auto;text-align:center;transform:translateY(-50%);color:#fff9;font:12px system-ui;pointer-events:none}
+.dsh-ap-boost{position:absolute;z-index:40;top:56px;left:50%;transform:translateX(-50%);padding:7px 12px;border-radius:20px;color:#fff;background:#000a;font:13px system-ui;pointer-events:none}
+.dsh-ap-error{position:absolute;z-index:60;bottom:47px;left:12px;right:12px;background:#301313ed;color:#fff;border:1px solid #ff9a9a70;border-radius:7px;padding:10px;font:12px/1.5 system-ui;max-height:50%;overflow:auto}
+.dsh-ap-error button{margin-left:8px}
+.dsh-artplayer-gesture-surface{position:absolute;inset:0;z-index:20;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.dsh-ap-video .art-controls,.dsh-ap-video .art-bottom{z-index:30}
+.dsh-ap-video .art-mask,.dsh-ap-video .art-layer,.dsh-ap-video .art-notice,.dsh-ap-video .art-loading{pointer-events:none}
+.dsh-ap-video .art-video{position:absolute;object-fit:contain}
+.dsh-ap-video .art-bottom{padding:0 10px}
+.dsh-ap-video .art-control{min-width:30px}
+.dsh-ap-video .art-control-time{font-size:11px}
+@media(max-height:360px){.dsh-ap-dialog:not([data-expanded=true]){width:min(460px,calc((100dvh - 24px)*16/9));margin-top:12px}}
+@media(prefers-reduced-motion:reduce){.dsh-ap-header{transition:none}}
