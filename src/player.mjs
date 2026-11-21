@@ -16,6 +16,7 @@ export class PlayerController {
     this.gestures = null;
     this.objectURL = null;
     this.key = null;
+    this.sourceURL = null;
     this.generation = 0;
     this.playRequest = 0;
     this.destroyed = false;
@@ -35,7 +36,10 @@ export class PlayerController {
     Artplayer.LOG_VERSION = false;
   }
 
-  checkpoint() { return progressSnapshot(this.key, this.prefs.rememberProgress, this.art?.video); }
+  checkpoint() {
+    if (this.gate.pending !== null) return null;
+    return progressSnapshot(this.key, this.prefs.rememberProgress, this.art?.video);
+  }
 
   saveProgress(force = false) {
     const snapshot = this.checkpoint();
@@ -64,6 +68,7 @@ export class PlayerController {
     if (this.objectURL) URL.revokeObjectURL(this.objectURL);
     this.objectURL = null;
     this.key = null;
+    this.sourceURL = null;
     this.gate.reset();
     this.container.replaceChildren();
     this.onBoost(false);
@@ -102,6 +107,7 @@ export class PlayerController {
     if (this.destroyed || generation !== this.generation) return false;
     if (file) { url = URL.createObjectURL(file); this.objectURL = url; }
     this.key = key;
+    this.sourceURL = file ? null : url;
     this.gate.reset(key);
     if (key && this.prefs.rememberProgress) {
       try {
@@ -221,9 +227,21 @@ export class PlayerController {
   setPreferences(value) {
     const valid = preferences(value);
     if (!valid) throw new Error('preferencesError');
+    const enableProgress = valid.rememberProgress && !this.prefs.rememberProgress;
     this.prefs = valid;
     if (!valid.rememberProgress) this.gate.reset(this.key);
     this.applyPreferences();
+    if (enableProgress && this.art && this.sourceURL && !this.key) {
+      const current = this.art, generation = this.generation;
+      const active = () => current === this.art && generation === this.generation &&
+        !this.destroyed && this.prefs.rememberProgress && !this.key;
+      return sourceKey(this.sourceURL).then(key => {
+        if (!active()) return;
+        this.key = key;
+        this.gate.reset(key);
+        this.saveProgress(true);
+      }, () => { if (active()) this.onError('hashError'); });
+    }
   }
 
   async play() {
