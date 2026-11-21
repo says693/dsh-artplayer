@@ -67,4 +67,6 @@ npm run build
 npm test
 ```
 
+GitHub Actions 在 Windows 上使用 Node.js 22.19.0 和 24 运行 `npm pack --dry-run`。该命令会先构建并运行测试，再列出 npm 包内容，不会发布。
+
 依赖许可见 `THIRD_PARTY_NOTICES.txt` 和 `licenses/`。验证范围、实际通过的检查及未验证项见 [VERIFICATION.md](VERIFICATION.md)。网页视觉、手机触摸操作和 dsh-Go 真机集成尚未完成实测。
